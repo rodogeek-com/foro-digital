@@ -1,0 +1,104 @@
+backend:
+  name: github
+  repo: rodogeek-com/foro-digital
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+
+  - name: "events"
+    label: "Eventos"
+
+    folder: "content/events"
+
+    create: true
+
+    slug: "{{slug}}"
+
+    fields:
+
+      - { label: "Título", name: "title", widget: "string" }
+
+      - { label: "Fecha", name: "date", widget: "datetime" }
+
+      - { label: "País", name: "country", widget: "string" }
+
+      - { label: "Speaker", name: "speaker", widget: "string" }
+
+      - { label: "Registro", name: "registration", widget: "string" }
+
+      - { label: "Descripción", name: "body", widget: "markdown" }
+
+  - name: "speakers"
+    label: "Speakers"
+
+    folder: "content/speakers"
+
+    create: true
+
+    slug: "{{slug}}"
+
+    fields:
+
+      - { label: "Nombre", name: "name", widget: "string" }
+
+      - { label: "País", name: "country", widget: "string" }
+
+      - { label: "LinkedIn", name: "linkedin", widget: "string" }
+
+      - { label: "Temas", name: "topics", widget: "string" }
+
+      - { label: "Biografía", name: "body", widget: "markdown" }
+
+  - name: "chapters"
+    label: "Capítulos"
+
+    folder: "content/chapters"
+
+    create: true
+
+    slug: "{{slug}}"
+
+    fields:
+
+      - { label: "País", name: "country", widget: "string" }
+
+      - { label: "Estado", name: "status", widget: "string" }
+
+      - { label: "Líder", name: "leader", widget: "string" }
+
+  - name: "recordings"
+    label: "Grabaciones"
+
+    folder: "content/recordings"
+
+    create: true
+
+    slug: "{{slug}}"
+
+    fields:
+
+      - { label: "Título", name: "title", widget: "string" }
+
+      - { label: "YouTube", name: "youtube", widget: "string" }
+
+      - { label: "Speaker", name: "speaker", widget: "string" }
+
+  - name: "sponsors"
+    label: "Patrocinadores"
+
+    folder: "content/sponsors"
+
+    create: true
+
+    slug: "{{slug}}"
+
+    fields:
+
+      - { label: "Empresa", name: "company", widget: "string" }
+
+      - { label: "Tipo", name: "type", widget: "string" }
+
+      - { label: "URL", name: "url", widget: "string" }
