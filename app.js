@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const svgObject = document.getElementById("latam-svg");
 
   if (!svgObject) {
-    console.log("Mapa LATAM no encontrado");
+    console.log("Mapa LATAM no encontrado.");
     return;
   }
 
@@ -149,9 +149,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const svgDoc = svgObject.contentDocument;
 
     if (!svgDoc) {
-      console.log("No se pudo cargar el SVG");
+      console.log("No fue posible acceder al SVG.");
       return;
     }
+
+    const countryName =
+      document.getElementById("country-name");
+
+    const countryStatus =
+      document.getElementById("country-status");
+
+    const countrySpeakers =
+      document.getElementById("country-speakers");
+
+    const countryEvents =
+      document.getElementById("country-events");
 
     Object.keys(countryData).forEach(code => {
 
@@ -161,65 +173,64 @@ document.addEventListener("DOMContentLoaded", () => {
 
       country.style.fill = "#84CC16";
       country.style.cursor = "pointer";
-      country.style.transition = "all .25s ease";
+      country.style.transition =
+        "fill .25s ease, opacity .25s ease";
 
       country.addEventListener("mouseenter", () => {
 
-        country.style.fill = "#12B886";
-        country.style.opacity = "0.9";
+        if (!country.classList.contains("selected")) {
+
+          country.style.fill = "#12B886";
+
+        }
 
       });
 
       country.addEventListener("mouseleave", () => {
 
-        country.style.fill = "#84CC16";
-        country.style.opacity = "1";
+        if (!country.classList.contains("selected")) {
+
+          country.style.fill = "#84CC16";
+
+        }
 
       });
 
       country.addEventListener("click", () => {
 
-        const info = countryData[code];
+        svgDoc
+          .querySelectorAll("path")
+          .forEach(path => {
 
-        const countryName =
-          document.getElementById("country-name");
+            path.classList.remove("selected");
 
-        const countryStatus =
-          document.getElementById("country-status");
+            path.style.fill = "#84CC16";
 
-        const countrySpeakers =
-          document.getElementById("country-speakers");
+          });
 
-        const countryEvents =
-          document.getElementById("country-events");
-
-        if (countryName) {
-          countryName.textContent = info.name;
-        }
-
-        if (countryStatus) {
-          countryStatus.textContent = info.status;
-        }
-
-        if (countrySpeakers) {
-          countrySpeakers.textContent = info.speakers;
-        }
-
-        if (countryEvents) {
-          countryEvents.textContent = info.events;
-        }
-
-        svgDoc.querySelectorAll("path").forEach(path => {
-          path.style.fill = "#84CC16";
-        });
+        country.classList.add("selected");
 
         country.style.fill = "#0F766E";
+
+        const info = countryData[code];
+
+        countryName.textContent =
+          info.name;
+
+        countryStatus.textContent =
+          info.status;
+
+        countrySpeakers.textContent =
+          info.speakers;
+
+        countryEvents.textContent =
+          info.events;
 
       });
 
     });
 
-    console.log("Foro Digital LATAM cargado correctamente");
+    console.log("Mapa LATAM inicializado");
 
   });
 
